@@ -1,0 +1,9 @@
+import React from 'react'
+
+const Root = React.createClass({
+  render () {
+    return <div>Hello world </div>
+  }
+})
+
+export default Root
