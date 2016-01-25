@@ -29,3 +29,9 @@ node_modules
 #sublime
 *.sublime-project
 *.sublime-workspace
+
+#built app
+*vendor.js
+*vendor.js.map
+*app.js
+*app.js.map
