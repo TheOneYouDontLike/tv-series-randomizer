@@ -4,7 +4,9 @@
   "description": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register ."
+    "build-watch": "./node_modules/.bin/webpack --watch",
+    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register .",
+    "start": "node ./src/server.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,7 @@
     "express": "^4.13.4",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "redux": "^3.2.0",
     "winston": "^2.1.1"
   }
 }

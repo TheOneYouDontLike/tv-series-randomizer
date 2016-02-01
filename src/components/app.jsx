@@ -1,7 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {createStore} from 'redux'
 import Root from './root'
 
-const rootElement = document.getElementById('main-container')
+const series = (state = [], action) => {
+  switch (action.type) {
+    case 'SEARCH':
+      return [
+        'series1',
+        'series2'
+      ]
+    default:
+      return state
+  }
+}
 
-ReactDOM.render(<Root />, rootElement)
+const store = createStore(series)
+
+const rootElement = document.getElementById('main-container')
+const render = () => ReactDOM.render(<Root store={store} />, rootElement)
+
+store.subscribe(render)
+render()
