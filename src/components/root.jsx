@@ -7,7 +7,7 @@ const Root = ({store}) => {
         <input placeholder="Search for a series..." type="text" />
         <button onClick={() => store.dispatch({type: 'SEARCH'})}>Search</button>
       </div>
-      {store.getState().map(episode => <div>{episode}</div>)}
+      {store.getState().series.map(episode => <div>{episode}</div>)}
     </div>
   )
 }

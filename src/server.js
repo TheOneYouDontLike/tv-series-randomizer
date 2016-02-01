@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
 
+app.get('/series', (req, res) => {
+    res.json(['Friends', 'Futurama'])
+})
+
 app.listen(PORT, () => {
   logger.log('info', 'listening on port ', PORT)
 })
