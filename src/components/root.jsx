@@ -1,13 +1,42 @@
 import React from 'react'
+import {search} from '../store/actions'
+
+const SearchBar = React.createClass({
+  propTypes: {
+    dispatch: React.PropTypes.func.isRequired
+  },
+
+  render () {
+    return (
+      <div>
+        <input placeholder="Name..." ref="search" type="text" />
+        <button onClick={() => this.props.dispatch(search(this.refs.search.value))}>Search</button>
+      </div>
+    )
+  }
+})
+
+const SearchResult = ({series}) => {
+  return (
+    <div>
+      <div><strong>{series.Title} ({series.Year})</strong></div>
+      <img
+        alt={series.Title}
+        src={series.Poster}
+        style={{height: '150px'}}
+      />
+
+    </div>
+  )
+}
 
 const Root = ({store}) => {
   return (
     <div>
       <div className="search-bar">
-        <input placeholder="Search for a series..." type="text" />
-        <button onClick={() => store.dispatch({type: 'SEARCH'})}>Search</button>
+        <SearchBar dispatch={store.dispatch} />
       </div>
-      {store.getState().series.map(episode => <div>{episode}</div>)}
+      {store.getState().searchResults.map(series => <SearchResult key={series.imdbID} series={series} />)}
     </div>
   )
 }

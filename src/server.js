@@ -1,6 +1,7 @@
 const express = require('express'),
       path    = require('path'),
-      logger  = require('./logger')
+      logger  = require('./logger'),
+      request = require('request')
 const app = express()
 
 const PORT = process.env.PORT || 3000
@@ -12,8 +13,18 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
 
-app.get('/series', (req, res) => {
-    res.json(['Friends', 'Futurama'])
+app.get('/api/search/:name', (req, res) => {
+  request.get(`http://www.omdbapi.com/?s=${req.params.name}`, (error, response, body) => {
+    if (error) {
+      res.status(404)
+      return
+    }
+    res.json(JSON.parse(body).Search)
+  })
+})
+
+app.get('/api/series', (req, res) => {
+  res.json([])
 })
 
 app.listen(PORT, () => {
