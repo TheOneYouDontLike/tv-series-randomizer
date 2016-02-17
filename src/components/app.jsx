@@ -7,17 +7,23 @@ import request from 'superagent'
 
 const rootElement = document.getElementById('main-container')
 const render = () => {
-  console.log(store.getState())
-  ReactDOM.render(<Root store={store} />, rootElement)
+  //console.log(store.getState())
+  ReactDOM.render(
+    <Root
+      dispatch={store.dispatch}
+      searchResults={store.getState().searchResults}
+    />,
+    rootElement)
 }
 
 store.subscribe(render)
 render()
 
-request
-  .get('api/series')
-  .end((error, data) => {
-    if (data.body) {
-      store.dispatch(addSeries(data.body))
-    }
-})
+// request
+//   .get('api/series')
+//   .end((error, data) => {
+//     if (data.body) {
+//       console.log('first request')
+//       store.dispatch(addSeries(data.body))
+//     }
+// })

@@ -14,12 +14,23 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/search/:name', (req, res) => {
-  request.get(`http://www.omdbapi.com/?s=${req.params.name}`, (error, response, body) => {
+  request.get(`http://www.omdbapi.com/?s=${req.params.name}&type=series`, (error, response, body) => {
     if (error) {
       res.status(404)
       return
     }
     res.json(JSON.parse(body).Search)
+  })
+})
+
+app.get('/api/series/:imdbId', (req, res) => {
+  request.get(`http://www.omdbapi.com/?i=${req.params.imdbId}`, (error, response, body) => {
+    if (error) {
+      logger.log('error', error)
+      res.status(404)
+      return
+    }
+    res.json(JSON.parse(body))
   })
 })
 

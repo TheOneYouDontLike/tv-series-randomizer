@@ -1,27 +1,14 @@
 import React from 'react'
-import {search} from '../store/actions'
+import SearchBar from './searchBar'
+import {selectMovie} from '../store/actions'
 
-const SearchBar = React.createClass({
-  propTypes: {
-    dispatch: React.PropTypes.func.isRequired
-  },
-
-  render () {
-    return (
-      <div>
-        <input placeholder="Name..." ref="search" type="text" />
-        <button onClick={() => this.props.dispatch(search(this.refs.search.value))}>Search</button>
-      </div>
-    )
-  }
-})
-
-const SearchResult = ({series}) => {
+const SearchResult = ({dispatch, series}) => {
   return (
     <div>
       <div><strong>{series.Title} ({series.Year})</strong></div>
       <img
         alt={series.Title}
+        onClick={() => dispatch(selectMovie(series.imdbID))}
         src={series.Poster}
         style={{height: '150px'}}
       />
@@ -30,19 +17,27 @@ const SearchResult = ({series}) => {
   )
 }
 
-const Root = ({store}) => {
+const Root = ({dispatch, searchResults}) => {
+  console.log('rendering root', searchResults)
   return (
     <div>
       <div className="search-bar">
-        <SearchBar dispatch={store.dispatch} />
+        <SearchBar dispatch={dispatch} />
       </div>
-      {store.getState().searchResults.map(series => <SearchResult key={series.imdbID} series={series} />)}
+      {searchResults.foundSeries.map(series => (
+        <SearchResult
+          dispatch={dispatch}
+          key={series.imdbID}
+          series={series}
+        />
+      ))}
     </div>
   )
 }
 
-Root.PropTypes = {
-  store: React.PropTypes.object.isRequired
+Root.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
+  searchResults: React.PropTypes.object.isRequired
 }
 
 export default Root
