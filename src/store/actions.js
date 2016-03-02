@@ -29,13 +29,13 @@ export function selectMovie (imdbId) {
           return
         }
 
-        dispatch(recieveSelectedSeries(data.body))
+        dispatch(recieveSelectedSearchResult(data.body))
       })
     }
 }
 
-function recieveSelectedSeries (series) {
-  return {type: 'RECIEVE_SELECTED_SERIES', series}
+function recieveSelectedSearchResult (selectedSearchResult) {
+  return {type: 'RECIEVE_SELECTED_SEARCH_RESULT', selectedSearchResult}
 }
 
 export function addSeries (series) {

@@ -10,7 +10,9 @@ const SearchBar = React.createClass({
     return (
       <div>
         <input placeholder="Name..." ref="search" type="text" />
-        <button onClick={() => this.props.dispatch(search(this.refs.search.value))}>Search</button>
+        <button onClick={() => this.props.dispatch(search(this.refs.search.value))}>
+          Search
+        </button>
       </div>
     )
   }

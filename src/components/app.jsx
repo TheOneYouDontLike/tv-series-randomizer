@@ -7,11 +7,15 @@ import request from 'superagent'
 
 const rootElement = document.getElementById('main-container')
 const render = () => {
-  //console.log(store.getState())
+  console.log(store.getState())
+
+  let state = store.getState()
+
   ReactDOM.render(
     <Root
       dispatch={store.dispatch}
-      searchResults={store.getState().searchResults}
+      searchResults={state.searchResults}
+      selectedSeries={state.selectedSeries}
     />,
     rootElement)
 }
