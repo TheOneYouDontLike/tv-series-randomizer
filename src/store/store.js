@@ -23,10 +23,14 @@ const searchResults = (state = initialState, action) => {
 
 const series = (state = [], action) => {
   switch (action.type) {
-    case 'ADD':
+    case 'ADD_TO_WATCHING':
+      if (state.some(series => series.imdbID === action.series.imdbID)) {
+        return state;
+      }
+
       return [
         ...state,
-        ...action.series
+        action.series
       ]
     default:
       return state

@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchBar from './searchBar'
 import SearchResult from './searchResult'
+import {addToWatching} from '../store/actions'
 
 const temporaryStyleForSearchResults = {
   maxHeight: '300px',
@@ -8,8 +9,6 @@ const temporaryStyleForSearchResults = {
 }
 
 const Root = ({dispatch, searchResults}) => {
-  console.log('rendering root', searchResults)
-
   const {foundSeries, selectedSearchResult} = searchResults
 
   return (
@@ -35,6 +34,9 @@ const Root = ({dispatch, searchResults}) => {
         <div>{selectedSearchResult.Runtime}</div>
         <div>{selectedSearchResult.Plot}</div>
         <div><img src={selectedSearchResult.Poster} /></div>
+        <div>
+          <button onClick={() => dispatch(addToWatching(selectedSearchResult))}>Add to 'Watching'</button>
+        </div>
       </div>
     </div>
   )

@@ -38,6 +38,10 @@ function recieveSelectedSearchResult (selectedSearchResult) {
   return {type: 'RECIEVE_SELECTED_SEARCH_RESULT', selectedSearchResult}
 }
 
+export function addToWatching (series) {
+  return {type: 'ADD_TO_WATCHING', series}
+}
+
 export function addSeries (series) {
   return {type: 'ADD', series}
 }
