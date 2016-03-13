@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Root from './root'
 import store from '../store/store'
-import {addSeries} from '../store/actions'
-import request from 'superagent'
+// import {addSeries} from '../store/actions'
+// import request from 'superagent'
 
 const rootElement = document.getElementById('main-container')
 const render = () => {
@@ -15,7 +15,7 @@ const render = () => {
     <Root
       dispatch={store.dispatch}
       searchResults={state.searchResults}
-      selectedSeries={state.selectedSeries}
+      watchingSeries={state.series}
     />,
     rootElement)
 }

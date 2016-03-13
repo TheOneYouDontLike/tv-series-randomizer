@@ -3,12 +3,13 @@ import SearchBar from './searchBar'
 import SearchResult from './searchResult'
 import {addToWatching} from '../store/actions'
 
-const temporaryStyleForSearchResults = {
-  maxHeight: '300px',
+const temporaryStyleForBoxes = {
+  float: 'left',
+  height: '300px',
   overflow: 'scroll'
 }
 
-const Root = ({dispatch, searchResults}) => {
+const Root = ({dispatch, searchResults, series}) => {
   const {foundSeries, selectedSearchResult} = searchResults
 
   return (
@@ -16,7 +17,7 @@ const Root = ({dispatch, searchResults}) => {
       <div className="search-bar">
         <SearchBar dispatch={dispatch} />
       </div>
-      <div className="search-results" style={temporaryStyleForSearchResults}>
+      <div className="search-results" style={temporaryStyleForBoxes}>
         {foundSeries.map(series => (
           <SearchResult
             dispatch={dispatch}
@@ -25,7 +26,12 @@ const Root = ({dispatch, searchResults}) => {
           />
         ))}
       </div>
-      <div className="selected-series">
+      <div className="watching-series" style={temporaryStyleForBoxes}>
+        <ul>
+          {series.map(singleSeries => <li key={singleSeries.imdbID}>{singleSeries.Title}</li>)}
+        </ul>
+      </div>
+      <div className="selected-series" style={{clear: 'both'}}>
         <div>{selectedSearchResult.Title}</div>
         <div>{selectedSearchResult.Year}</div>
         <div>{selectedSearchResult.imdbRating}</div>
@@ -44,7 +50,8 @@ const Root = ({dispatch, searchResults}) => {
 
 Root.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
-  searchResults: React.PropTypes.object.isRequired
+  searchResults: React.PropTypes.object.isRequired,
+  series: React.PropTypes.array.isRequired
 }
 
 export default Root

@@ -31,7 +31,7 @@ export function selectMovie (imdbId) {
 
         dispatch(recieveSelectedSearchResult(data.body))
       })
-    }
+  }
 }
 
 function recieveSelectedSearchResult (selectedSearchResult) {
