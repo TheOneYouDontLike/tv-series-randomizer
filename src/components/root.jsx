@@ -18,11 +18,11 @@ const Root = ({dispatch, searchResults, series}) => {
         <SearchBar dispatch={dispatch} />
       </div>
       <div className="search-results" style={temporaryStyleForBoxes}>
-        {foundSeries.map(series => (
+        {foundSeries.map(singleSeries => (
           <SearchResult
             dispatch={dispatch}
-            key={series.imdbID}
-            series={series}
+            key={singleSeries.imdbID}
+            series={singleSeries}
           />
         ))}
       </div>

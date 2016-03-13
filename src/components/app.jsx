@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Root from './root'
 import store from '../store/store'
-// import {addSeries} from '../store/actions'
-// import request from 'superagent'
+import {populateStore} from '../store/actions'
 
 const rootElement = document.getElementById('main-container')
 const render = () => {
@@ -15,19 +14,11 @@ const render = () => {
     <Root
       dispatch={store.dispatch}
       searchResults={state.searchResults}
-      watchingSeries={state.series}
+      series={state.series}
     />,
     rootElement)
 }
 
 store.subscribe(render)
 render()
-
-// request
-//   .get('api/series')
-//   .end((error, data) => {
-//     if (data.body) {
-//       console.log('first request')
-//       store.dispatch(addSeries(data.body))
-//     }
-// })
+store.dispatch(populateStore())

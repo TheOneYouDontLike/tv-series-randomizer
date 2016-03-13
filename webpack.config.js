@@ -8,7 +8,7 @@ module.exports = {
   },
 
   output: {
-      filename: './src/public/[name].js'
+    filename: './src/public/[name].js'
   },
 
   module: {

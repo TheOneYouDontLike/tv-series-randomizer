@@ -1,6 +1,11 @@
 import request from 'superagent'
+import userPersistence from './userPersistence'
 
 export function search (name) {
+  const recieveSearchResults = searchResults => {
+    return {type: 'RECIEVE_SEARCH_RESULTS', searchResults}
+  }
+
   return dispatch => {
     request
       .get(`api/search/${name}`)
@@ -15,11 +20,11 @@ export function search (name) {
   }
 }
 
-function recieveSearchResults (searchResults) {
-  return {type: 'RECIEVE_SEARCH_RESULTS', searchResults}
-}
-
 export function selectMovie (imdbId) {
+  const recieveSelectedSearchResult = selectedSearchResult => {
+    return {type: 'RECIEVE_SELECTED_SEARCH_RESULT', selectedSearchResult}
+  }
+
   return dispatch => {
     request
       .get(`api/series/${imdbId}`)
@@ -34,14 +39,14 @@ export function selectMovie (imdbId) {
   }
 }
 
-function recieveSelectedSearchResult (selectedSearchResult) {
-  return {type: 'RECIEVE_SELECTED_SEARCH_RESULT', selectedSearchResult}
-}
-
 export function addToWatching (series) {
+  userPersistence.add(series)
+
   return {type: 'ADD_TO_WATCHING', series}
 }
 
-export function addSeries (series) {
-  return {type: 'ADD', series}
+export function populateStore () {
+  const allSeries = userPersistence.getAll()
+  
+  return {type: 'POPULATE_STORE', allSeries}
 }

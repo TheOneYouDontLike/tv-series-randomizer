@@ -32,6 +32,12 @@ const series = (state = [], action) => {
         ...state,
         action.series
       ]
+    case 'POPULATE_STORE':
+      console.log('populating store...', action)
+      return [
+        ...state,
+        ...action.allSeries
+      ]
     default:
       return state
   }
