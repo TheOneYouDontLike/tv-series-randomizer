@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-const initialState = {foundSeries: [], selectedSearchResult: {}}
+const initialState = {foundSeries: [], selectedSearchResult: null}
 
 const searchResults = (state = initialState, action) => {
   console.log(action)

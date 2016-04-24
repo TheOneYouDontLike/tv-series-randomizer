@@ -20,7 +20,7 @@ export function search (name) {
   }
 }
 
-export function selectMovie (imdbId) {
+export function selectShow (imdbId) {
   const recieveSelectedSearchResult = selectedSearchResult => {
     return {type: 'RECIEVE_SELECTED_SEARCH_RESULT', selectedSearchResult}
   }

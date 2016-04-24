@@ -1,56 +1,51 @@
 import React from 'react'
 import SearchBar from './searchBar'
 import SearchResult from './searchResult'
-import {addToWatching} from '../store/actions'
+import SelectedShow from './selectedShow'
 
-const temporaryStyleForBoxes = {
-  float: 'left',
-  height: '300px',
-  overflow: 'scroll'
-}
+const Root = React.createClass({
+  propTypes: {
+    dispatch: React.PropTypes.func.isRequired,
+    searchResults: React.PropTypes.object.isRequired,
+    series: React.PropTypes.array.isRequired
+  },
 
-const Root = ({dispatch, searchResults, series}) => {
-  const {foundSeries, selectedSearchResult} = searchResults
-  const isValid = true
-  return (
-    <div className="Root container">
-      <SearchBar dispatch={dispatch} />
-      <div className="search-results" style={temporaryStyleForBoxes}>
-        {foundSeries.map(singleSeries => (
-          <SearchResult
+  componentDidMount () {
+    $('.collapsible').collapsible()
+  },
+
+  render () {
+    const {dispatch, searchResults, series} = this.props
+    const {foundSeries, selectedSearchResult} = searchResults
+
+    return (
+      <div className="Root container">
+        <SearchBar dispatch={dispatch} />
+
+        {selectedSearchResult ?
+          <SelectedShow
             dispatch={dispatch}
-            key={singleSeries.imdbID}
-            series={singleSeries}
-          />
-        ))}
+            selectedShow={selectedSearchResult}
+          /> :
+          <ul className="collection">
+            {foundSeries.map(singleSeries => (
+              <SearchResult
+                dispatch={dispatch}
+                key={singleSeries.imdbID}
+                show={singleSeries}
+              />
+            ))}
+          </ul>
+        }
       </div>
-{/*
+    )
+  }
+})
+/*
       <div className="watching-series" style={temporaryStyleForBoxes}>
         <ul>
           {series.map(singleSeries => <li key={singleSeries.imdbID}>{singleSeries.Title}</li>)}
         </ul>
-      </div>
-      <div className="selected-series" style={{clear: 'both'}}>
-        <div>{selectedSearchResult.Title}</div>
-        <div>{selectedSearchResult.Year}</div>
-        <div>{selectedSearchResult.imdbRating}</div>
-        <div>{selectedSearchResult.Genre}</div>
-        <div>{selectedSearchResult.Actors}</div>
-        <div>{selectedSearchResult.Runtime}</div>
-        <div>{selectedSearchResult.Plot}</div>
-        <div><img src={selectedSearchResult.Poster} /></div>
-        <div>
-          <button onClick={() => dispatch(addToWatching(selectedSearchResult))}>Add to 'Watching'</button>
-        </div>
-      </div>*/}
-    </div>
-  )
-}
-
-Root.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  searchResults: React.PropTypes.object.isRequired,
-  series: React.PropTypes.array.isRequired
-}
+      </div>*/
 
 export default Root
