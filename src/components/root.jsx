@@ -11,12 +11,10 @@ const temporaryStyleForBoxes = {
 
 const Root = ({dispatch, searchResults, series}) => {
   const {foundSeries, selectedSearchResult} = searchResults
-
+  const isValid = true
   return (
-    <div>
-      <div className="search-bar">
-        <SearchBar dispatch={dispatch} />
-      </div>
+    <div className="Root container">
+      <SearchBar dispatch={dispatch} />
       <div className="search-results" style={temporaryStyleForBoxes}>
         {foundSeries.map(singleSeries => (
           <SearchResult
@@ -26,6 +24,7 @@ const Root = ({dispatch, searchResults, series}) => {
           />
         ))}
       </div>
+{/*
       <div className="watching-series" style={temporaryStyleForBoxes}>
         <ul>
           {series.map(singleSeries => <li key={singleSeries.imdbID}>{singleSeries.Title}</li>)}
@@ -43,7 +42,7 @@ const Root = ({dispatch, searchResults, series}) => {
         <div>
           <button onClick={() => dispatch(addToWatching(selectedSearchResult))}>Add to 'Watching'</button>
         </div>
-      </div>
+      </div>*/}
     </div>
   )
 }

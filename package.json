@@ -4,10 +4,10 @@
   "description": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "build-watch": "./node_modules/.bin/webpack --watch",
-    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register ./src/tests",
+    "build:dev": "webpack --watch",
+    "test": "mocha --compilers js:babel-core/register ./src/tests",
     "start": "node ./src/server.js",
-    "watch": "./node_modules/.bin/nodemon ./src/server.js"
+    "start:watch": "nodemon ./src/server.js"
   },
   "repository": {
     "type": "git",

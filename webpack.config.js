@@ -3,8 +3,8 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: {
-    app: ['babel-polyfill', './src/components/app.jsx'],
-    vendors: ['react']
+    app: ['./src/components/app.jsx'],
+    vendors: ['react', 'babel-polyfill']
   },
 
   output: {
@@ -18,7 +18,8 @@ module.exports = {
 
         include: [
           path.resolve(__dirname, 'src/components'),
-          path.resolve(__dirname, 'src/store')
+          path.resolve(__dirname, 'src/store'),
+          path.resolve(__dirname, 'src/debounce.js')
         ],
 
         test: [/\.jsx$/, /\.js$/]

@@ -47,6 +47,6 @@ export function addToWatching (series) {
 
 export function populateStore () {
   const allSeries = userPersistence.getAll()
-  
+
   return {type: 'POPULATE_STORE', allSeries}
 }
