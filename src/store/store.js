@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-const initialState = {foundSeries: [], selectedSearchResult: null}
+const initialState = {foundSeries: [], selectedSearchResult: null, isSearching: false}
 
 const searchResults = (state = initialState, action) => {
   console.log(action)
@@ -14,7 +14,8 @@ const searchResults = (state = initialState, action) => {
   case 'RECIEVE_SELECTED_SEARCH_RESULT':
     return {
       ...state,
-      selectedSearchResult: action.selectedSearchResult
+      selectedSearchResult: action.selectedSearchResult,
+      isSearching: false
     }
   case 'CLOSE_SELECTED_SHOW':
     return {
@@ -25,6 +26,11 @@ const searchResults = (state = initialState, action) => {
     return {
       ...state,
       foundSeries: []
+    }
+  case 'IS_SEARCHING':
+    return {
+      ...state,
+      isSearching: !state.isSearching
     }
   default:
     return state

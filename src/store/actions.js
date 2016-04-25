@@ -58,3 +58,7 @@ export function closeSelectedShow () {
 export function clearSearchResults () {
   return {type: 'CLEAR_SEARCH_RESULTS'}
 }
+
+export function isSearching () {
+  return {type: 'IS_SEARCHING'}
+}

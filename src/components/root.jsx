@@ -2,6 +2,7 @@ import React from 'react'
 import SearchBar from './searchBar'
 import SearchResult from './searchResult'
 import SelectedShow from './selectedShow'
+import Spinner from './spinner'
 
 const Root = React.createClass({
   propTypes: {
@@ -12,11 +13,13 @@ const Root = React.createClass({
 
   render () {
     const {dispatch, searchResults, series} = this.props
-    const {foundSeries, selectedSearchResult} = searchResults
+    const {foundSeries, selectedSearchResult, isSearching} = searchResults
 
     return (
       <div className="Root container">
-        <SearchBar dispatch={dispatch} />
+        {!selectedSearchResult ?
+          <SearchBar dispatch={dispatch} /> : null
+        }
 
         {selectedSearchResult ?
           <SelectedShow
@@ -24,8 +27,9 @@ const Root = React.createClass({
             selectedShow={selectedSearchResult}
           /> : null
         }
+
         {
-          !selectedSearchResult && foundSeries.length ?
+          !selectedSearchResult && foundSeries.length && !isSearching ?
             <ul className="collection">
               {foundSeries.map(singleSeries => (
                 <SearchResult
@@ -36,15 +40,23 @@ const Root = React.createClass({
               ))}
             </ul> : null
         }
+
+        {
+          !selectedSearchResult && !foundSeries.length && !isSearching ?
+            <div>
+              <h4>Currently watching</h4>
+              <ul className="collection">
+                {series.map(singleSeries => (
+                  <li className="collection-item" key={singleSeries.imdbID}>{singleSeries.Title}</li>
+                ))}
+              </ul>
+            </div> : null
+        }
+
+        {isSearching ? <Spinner /> : null}
       </div>
     )
   }
 })
-/*
-      <div className="watching-series" style={temporaryStyleForBoxes}>
-        <ul>
-          {series.map(singleSeries => <li key={singleSeries.imdbID}>{singleSeries.Title}</li>)}
-        </ul>
-      </div>*/
 
 export default Root
