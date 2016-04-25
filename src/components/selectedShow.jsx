@@ -1,10 +1,17 @@
 import React from 'react'
-import {addToWatching, closeSelectedShow} from '../store/actions'
+import {addToWatching, closeSelectedShow, clearSearchResults} from '../store/actions'
 
 const SelectedShow = React.createClass({
   propTypes: {
     dispatch: React.PropTypes.func.isRequired,
     selectedShow: React.PropTypes.object.isRequired
+  },
+
+  handleAddingToWatching () {
+    const {dispatch, selectedShow} = this.props
+    dispatch(addToWatching(selectedShow))
+    dispatch(clearSearchResults())
+    dispatch(closeSelectedShow())
   },
 
   render () {
@@ -33,7 +40,7 @@ const SelectedShow = React.createClass({
           <div>{selectedShow.Plot}</div>
         </div>
         <div className="card-action">
-          <a href="#" onClick={() => dispatch(addToWatching(selectedShow))}>Watch</a>
+          <a href="#" onClick={this.handleAddingToWatching}>Watch</a>
           <a href="#" onClick={() => dispatch(closeSelectedShow())}>Close</a>
         </div>
       </div>

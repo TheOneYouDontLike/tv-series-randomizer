@@ -10,7 +10,7 @@ const SearchBar = React.createClass({
   componentWillMount () {
     this.debouncedSearch = debounce(value => {
       this.props.dispatch(search(value))
-    }, 1500)
+    }, 1000)
   },
 
   handleSearch (event) {

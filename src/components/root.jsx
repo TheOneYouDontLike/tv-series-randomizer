@@ -22,16 +22,19 @@ const Root = React.createClass({
           <SelectedShow
             dispatch={dispatch}
             selectedShow={selectedSearchResult}
-          /> :
-          <ul className="collection">
-            {foundSeries.map(singleSeries => (
-              <SearchResult
-                dispatch={dispatch}
-                key={singleSeries.imdbID}
-                show={singleSeries}
-              />
-            ))}
-          </ul>
+          /> : null
+        }
+        {
+          !selectedSearchResult && foundSeries.length ?
+            <ul className="collection">
+              {foundSeries.map(singleSeries => (
+                <SearchResult
+                  dispatch={dispatch}
+                  key={singleSeries.imdbID}
+                  show={singleSeries}
+                />
+              ))}
+            </ul> : null
         }
       </div>
     )
