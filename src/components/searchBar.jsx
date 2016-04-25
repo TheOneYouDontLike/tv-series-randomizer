@@ -22,18 +22,16 @@ const SearchBar = React.createClass({
     return (
       <nav className="SearchBar">
         <div className="nav-wrapper">
-          <form>
-            <div className="input-field">
-              <input
-                id="search"
-                onChange={this.handleSearch}
-                required
-                type="search"
-              />
-              <label htmlFor="search"><i className="material-icons">search</i></label>
-              <i className="material-icons">close</i>
-            </div>
-          </form>
+          <div className="input-field">
+            <input
+              id="search"
+              onChange={this.handleSearch}
+              required
+              type="search"
+            />
+            <label htmlFor="search"><i className="material-icons">search</i></label>
+            <i className="material-icons">close</i>
+          </div>
         </div>
       </nav>
     )

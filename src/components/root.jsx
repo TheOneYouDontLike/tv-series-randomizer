@@ -10,10 +10,6 @@ const Root = React.createClass({
     series: React.PropTypes.array.isRequired
   },
 
-  componentDidMount () {
-    $('.collapsible').collapsible()
-  },
-
   render () {
     const {dispatch, searchResults, series} = this.props
     const {foundSeries, selectedSearchResult} = searchResults

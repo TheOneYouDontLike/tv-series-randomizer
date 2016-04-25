@@ -1,5 +1,5 @@
 import React from 'react'
-import {addToWatching} from '../store/actions'
+import {addToWatching, closeSelectedShow} from '../store/actions'
 
 const SelectedShow = React.createClass({
   propTypes: {
@@ -34,7 +34,7 @@ const SelectedShow = React.createClass({
         </div>
         <div className="card-action">
           <a href="#" onClick={() => dispatch(addToWatching(selectedShow))}>Watch</a>
-          <a href="#">Close</a>
+          <a href="#" onClick={() => dispatch(closeSelectedShow())}>Close</a>
         </div>
       </div>
 

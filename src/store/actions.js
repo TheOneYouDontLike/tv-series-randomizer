@@ -39,14 +39,18 @@ export function selectShow (imdbId) {
   }
 }
 
-export function addToWatching (series) {
-  userPersistence.add(series)
+export function addToWatching (show) {
+  userPersistence.add(show)
 
-  return {type: 'ADD_TO_WATCHING', series}
+  return {type: 'ADD_TO_WATCHING', show}
 }
 
 export function populateStore () {
   const allSeries = userPersistence.getAll()
 
   return {type: 'POPULATE_STORE', allSeries}
+}
+
+export function closeSelectedShow () {
+  return {type: 'CLOSE_SELECTED_SHOW'}
 }
