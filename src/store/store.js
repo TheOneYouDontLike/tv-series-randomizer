@@ -21,6 +21,11 @@ const searchResults = (state = initialState, action) => {
       ...state,
       selectedSearchResult: null
     }
+  case 'CLEAR_SEARCH_RESULTS':
+    return {
+      ...state,
+      foundSeries: []
+    }
   default:
     return state
   }

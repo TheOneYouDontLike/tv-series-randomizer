@@ -1,5 +1,5 @@
 import React from 'react'
-import {search} from '../store/actions'
+import {search, clearSearchResults} from '../store/actions'
 import debounce from '../debounce'
 
 const SearchBar = React.createClass({
@@ -15,6 +15,9 @@ const SearchBar = React.createClass({
 
   handleSearch (event) {
     const {value} = event.target
+    if (!value) {
+      this.props.dispatch(clearSearchResults())
+    }
     this.debouncedSearch(value)
   },
 

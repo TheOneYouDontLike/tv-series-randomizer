@@ -11,7 +11,7 @@ export function search (name) {
       .get(`api/search/${name}`)
       .end((error, data) => {
         if (error || !data.body) {
-          alert(error)
+          console.log(error)
           dispatch(recieveSearchResults([]))
           return
         }
@@ -53,4 +53,8 @@ export function populateStore () {
 
 export function closeSelectedShow () {
   return {type: 'CLOSE_SELECTED_SHOW'}
+}
+
+export function clearSearchResults () {
+  return {type: 'CLEAR_SEARCH_RESULTS'}
 }
