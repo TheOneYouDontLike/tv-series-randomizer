@@ -3,6 +3,7 @@ import SearchBar from './searchBar'
 import SearchResult from './searchResult'
 import SelectedShow from './selectedShow'
 import Spinner from './spinner'
+import Show from './show.jsx'
 
 const Root = React.createClass({
   propTypes: {
@@ -46,8 +47,8 @@ const Root = React.createClass({
             <div>
               <h4>Currently watching</h4>
               <ul className="collection">
-                {series.map(singleSeries => (
-                  <li className="collection-item" key={singleSeries.imdbID}>{singleSeries.Title}</li>
+                {series.map(show => (
+                  <Show key={show.imdbID} show={show} />
                 ))}
               </ul>
             </div> : null
