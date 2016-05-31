@@ -36,9 +36,19 @@ const searchResults = (state = initialState, action) => {
     }
 
   case 'TOGGLE_SEARCH':
+    if (!state.searchStarted) {
+      return {
+        ...state,
+        searchStarted: true,
+      }
+    }
+
     return {
       ...state,
-      searchStarted: !state.searchStarted,
+      foundSeries: [],
+      isSearching: false,
+      searchStarted: false,
+      selectedSearchResult: null,
     }
 
   default:
