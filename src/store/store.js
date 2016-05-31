@@ -6,13 +6,14 @@ const initialState = {foundSeries: [], selectedSearchResult: null, isSearching: 
 const searchResults = (state = initialState, action) => {
   console.log(action)
   switch (action.type) {
-  case 'RECIEVE_SEARCH_RESULTS':
+  case 'RECEIVE_SEARCH_RESULTS':
     return {
       ...state,
       selectedSearchResult: state.selectedSearchResult,
       foundSeries: action.searchResults,
+      isSearching: false,
     }
-  case 'RECIEVE_SELECTED_SEARCH_RESULT':
+  case 'RECEIVE_SELECTED_SEARCH_RESULT':
     return {
       ...state,
       selectedSearchResult: action.selectedSearchResult,

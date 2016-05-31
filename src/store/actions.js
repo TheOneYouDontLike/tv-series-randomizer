@@ -2,8 +2,8 @@ import request from 'superagent'
 import userPersistence from './userPersistence'
 
 export function search (name) {
-  const recieveSearchResults = searchResults => {
-    return {type: 'RECIEVE_SEARCH_RESULTS', searchResults}
+  const receiveSearchResults = searchResults => {
+    return {type: 'RECEIVE_SEARCH_RESULTS', searchResults}
   }
 
   return dispatch => {
@@ -12,17 +12,17 @@ export function search (name) {
       .end((error, data) => {
         if (error || !data.body) {
           console.log(error)
-          dispatch(recieveSearchResults([]))
+          dispatch(receiveSearchResults([]))
           return
         }
-        dispatch(recieveSearchResults(data.body))
+        dispatch(receiveSearchResults(data.body))
       })
   }
 }
 
 export function selectShow (imdbId) {
-  const recieveSelectedSearchResult = selectedSearchResult => {
-    return {type: 'RECIEVE_SELECTED_SEARCH_RESULT', selectedSearchResult}
+  const receiveSelectedSearchResult = selectedSearchResult => {
+    return {type: 'RECEIVE_SELECTED_SEARCH_RESULT', selectedSearchResult}
   }
 
   return dispatch => {
@@ -34,7 +34,7 @@ export function selectShow (imdbId) {
           return
         }
 
-        dispatch(recieveSelectedSearchResult(data.body))
+        dispatch(receiveSelectedSearchResult(data.body))
       })
   }
 }
