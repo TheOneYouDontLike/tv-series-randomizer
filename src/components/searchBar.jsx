@@ -35,6 +35,7 @@ const SearchBar = React.createClass({
               id="search"
               onChange={this.handleSearch}
               required
+              style={{height: '4.5rem'}}
               type="search"
             />
             <label htmlFor="search"><i className="material-icons">search</i></label>
@@ -43,7 +44,7 @@ const SearchBar = React.createClass({
         </div>
       </nav>
     )
-  }
+  },
 })
 
 export default SearchBar

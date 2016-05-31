@@ -62,3 +62,7 @@ export function clearSearchResults () {
 export function isSearching () {
   return {type: 'IS_SEARCHING'}
 }
+
+export function toggleSearch () {
+  return {type: 'TOGGLE_SEARCH'}
+}

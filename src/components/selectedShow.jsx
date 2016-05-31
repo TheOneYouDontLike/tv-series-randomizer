@@ -1,5 +1,5 @@
 import React from 'react'
-import {addToWatching, closeSelectedShow, clearSearchResults} from '../store/actions'
+import {addToWatching, closeSelectedShow, clearSearchResults, toggleSearch} from '../store/actions'
 
 const SelectedShow = React.createClass({
   propTypes: {
@@ -12,6 +12,7 @@ const SelectedShow = React.createClass({
     dispatch(addToWatching(selectedShow))
     dispatch(clearSearchResults())
     dispatch(closeSelectedShow())
+    dispatch(toggleSearch())
   },
 
   render () {
