@@ -4,7 +4,7 @@
   "description": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "build:dev": "webpack --watch",
+    "build:watch": "webpack --watch",
     "test": "mocha --compilers js:babel-core/register ./src/tests",
     "start": "node ./src/server.js",
     "start:watch": "nodemon ./src/server.js"
