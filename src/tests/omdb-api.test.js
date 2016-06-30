@@ -14,7 +14,7 @@ const validate = (body, schema) => {
   })
 }
 
-describe('omdb api', () => {
+describe.skip('omdb api', () => {
   it('should return not empty array of movies when valid \'s\' parameter is provided', (done) => {
     // given
     const schema = Joi.object({
