@@ -1,9 +1,12 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-const initialState = {foundSeries: [], selectedSearchResult: null, isSearching: false, searchStarted: false}
+const localStorageInitialState = window.localStorage.getItem('TV_SERIES_RANDOMIZER')
+const searchResultsInitialState = localStorageInitialState ? JSON.parse(localStorageInitialState).searchResults :
+  {foundSeries: [], selectedSearchResult: null, isSearching: false, searchStarted: false}
+const seriesInitialState = localStorageInitialState ? JSON.parse(localStorageInitialState).series : []
 
-const searchResults = (state = initialState, action) => {
+const searchResults = (state = searchResultsInitialState, action) => {
   console.log(action)
   switch (action.type) {
   case 'RECEIVE_SEARCH_RESULTS':
@@ -56,7 +59,7 @@ const searchResults = (state = initialState, action) => {
   }
 }
 
-const series = (state = [], action) => {
+const series = (state = seriesInitialState, action) => {
   switch (action.type) {
   case 'ADD_TO_WATCHING':
     if (state.some(show => show.imdbID === action.show.imdbID)) {
@@ -81,8 +84,8 @@ const series = (state = [], action) => {
         randomEpisode: action.randomEpisode,
       },
     ]
+  // OBSOLETE ?
   case 'POPULATE_STORE':
-    console.log('populating store...', action)
     return [
       ...state,
       ...action.allSeries,

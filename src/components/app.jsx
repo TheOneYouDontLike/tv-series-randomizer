@@ -2,12 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Root from './root'
 import store from '../store/store'
-import {populateStore} from '../store/actions'
 
 const rootElement = document.getElementById('main-container')
 const render = () => {
-  console.log(store.getState())
-
   let state = store.getState()
 
   ReactDOM.render(
@@ -19,6 +16,10 @@ const render = () => {
     rootElement)
 }
 
+const serializeStore = () => {
+  window.localStorage.setItem('TV_SERIES_RANDOMIZER', JSON.stringify(store.getState()))
+}
+
 store.subscribe(render)
+store.subscribe(serializeStore)
 render()
-store.dispatch(populateStore())

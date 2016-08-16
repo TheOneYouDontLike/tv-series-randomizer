@@ -59,7 +59,6 @@ app.get('/api/series/:imdbId/randomize', (req, res) => {
       })
     }
   )
-  // })
 })
 
 app.get('/api/series', (req, res) => {
