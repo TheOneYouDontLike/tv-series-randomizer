@@ -45,6 +45,24 @@ export function addToWatching (show) {
   return {type: 'ADD_TO_WATCHING', show}
 }
 
+export function randomizeEpisode (imdbId, selectedSeason) {
+  const assignSelectedEpisode = randomEpisode => {
+    return {type: 'ASSIGN_SELECTED_EPISODE', randomEpisode, imdbId}
+  }
+  return dispatch => {
+    request
+      .get(`api/series/${imdbId}/randomize?season=${selectedSeason}`)
+      .end((error, data) => {
+        if (error || !data.body) {
+          alert(error)
+          return
+        }
+
+        dispatch(assignSelectedEpisode(data.body.randomEpisode))
+      })
+  }
+}
+
 export function populateStore () {
   const allSeries = userPersistence.getAll()
 

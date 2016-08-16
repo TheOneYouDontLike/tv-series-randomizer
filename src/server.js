@@ -38,35 +38,28 @@ app.get('/api/series/:imdbId', (req, res) => {
 })
 
 app.get('/api/series/:imdbId/randomize', (req, res) => {
-  request.get(`http://www.omdbapi.com/?i=${req.params.imdbId}&Season=1`, (error, response, body) => {
-    if (error) {
-      logger.log('error', error)
-      res.status(404)
-      return
-    }
-    const totalSeasons = JSON.parse(body).totalSeasons
-    const randomSeasonNumber = randomizer.getRandomSeason(totalSeasons)
+  const season = req.query.season
 
-    request.get(
-      `http://www.omdbapi.com/?i=${req.params.imdbId}&Season=${randomSeasonNumber}`,
-      (seasonError, seasonResponse, seasonBody) => {
-        if (error) {
-          logger.log('error', error)
-          res.status(404)
-          return
-        }
-
-        const episodes = JSON.parse(seasonBody).Episodes
-        const watchedEpisodesFromQuery = req.query[randomSeasonNumber]
-        const watchedEpisodes = watchedEpisodesFromQuery ? watchedEpisodesFromQuery.split(',') : []
-        const randomEpisode = randomizer.getRandomEpisode(episodes, watchedEpisodes)
-
-        res.json({
-          randomEpisode: Object.assign({}, randomEpisode, {season: randomSeasonNumber}),
-        })
+  request.get(
+    `http://www.omdbapi.com/?i=${req.params.imdbId}&Season=${season}`,
+    (error, seasonResponse, seasonBody) => {
+      if (error) {
+        logger.log('error', error)
+        res.status(404)
+        return
       }
-    )
-  })
+
+      const episodes = JSON.parse(seasonBody).Episodes
+      const watchedEpisodesFromQuery = req.query[season]
+      const watchedEpisodes = watchedEpisodesFromQuery ? watchedEpisodesFromQuery.split(',') : []
+      const randomEpisode = randomizer.getRandomEpisode(episodes, watchedEpisodes)
+
+      res.json({
+        randomEpisode: Object.assign({}, randomEpisode, {season: season}),
+      })
+    }
+  )
+  // })
 })
 
 app.get('/api/series', (req, res) => {

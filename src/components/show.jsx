@@ -1,8 +1,10 @@
 import React from 'react'
+import {randomizeEpisode} from '../store/actions'
 
 const Show = React.createClass({
   propTypes: {
-    show: React.PropTypes.object.isRequired
+    dispatch: React.PropTypes.func.isRequired,
+    show: React.PropTypes.object.isRequired,
   },
 
   componentDidMount () {
@@ -10,7 +12,8 @@ const Show = React.createClass({
   },
 
   render () {
-    const {show} = this.props
+    const {dispatch, show} = this.props
+    const {randomEpisode} = show
 
     return (
       <li className="collection-item clearfix">
@@ -19,42 +22,49 @@ const Show = React.createClass({
             float: 'left',
             height: '150px',
             overflow: 'hidden',
-            width: '100px'
+            width: '100px',
           }}
         >
           <img src={show.Poster} style={{width: '100%'}} />
         </div>
 
-        <div
-          style={{
-            float: 'left',
-            marginLeft: '1em'
-          }}
-        >
-          <div><h5>{show.Title}</h5></div>
-          <div>
-            Next to watch: <br />
-            <strong>The One With Two Parts I</strong>
-          </div>
-        </div>
+        {
+          randomEpisode ? (
+            <div
+              style={{
+                float: 'left',
+                marginLeft: '1em',
+              }}
+            >
+              <div><h5>{show.Title}</h5></div>
+              <div>
+                Next to watch: <br />
+                <strong>
+                  Episode {randomEpisode.Episode} - {randomEpisode.Title} <br />
+                  Season: {randomEpisode.season} <br />
+                  IMDB Rating: {randomEpisode.imdbRating}
+                </strong>
+              </div>
+            </div>
+          ) : null
+        }
 
         <div
           style={{float: 'right'}}
         >
           <div className="input-field">
-            <select>
+            <select ref={(selectField) => {this.selectField = selectField}}>
               <option disabled value="">Choose your option</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              {Array(Number(show.totalSeasons)).fill().map((_, i) => <option key={i} value={i + 1}>{i + 1}</option>)}
             </select>
             <label>Season</label>
           </div>
 
           <button
             className="btn waves-effect waves-light"
+            onClick={() => dispatch(randomizeEpisode(show.imdbID, this.selectField.value))}
             style={{
-              margin: '1em 0'
+              margin: '1em 0',
             }}
             type="button"
           >
@@ -64,7 +74,7 @@ const Show = React.createClass({
         </div>
       </li>
     )
-  }
+  },
 })
 
 export default Show

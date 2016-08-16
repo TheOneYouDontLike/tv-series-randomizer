@@ -67,6 +67,20 @@ const series = (state = [], action) => {
       ...state,
       action.show,
     ]
+  case 'ASSIGN_SELECTED_EPISODE':
+    if (!state.some(show => show.imdbID === action.imdbId)) {
+      return state
+    }
+
+    const foundShow = state.find(show => show.imdbID === action.imdbId)
+
+    return [
+      ...state.filter(show => show.imdbID !== action.imdbId),
+      {
+        ...foundShow,
+        randomEpisode: action.randomEpisode,
+      },
+    ]
   case 'POPULATE_STORE':
     console.log('populating store...', action)
     return [

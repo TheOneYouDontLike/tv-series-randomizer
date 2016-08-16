@@ -68,7 +68,7 @@ const Root = React.createClass({
               <h4>Currently watching</h4>
               <ul className="collection">
                 {series.map(show => (
-                  <Show key={show.imdbID} show={show} />
+                  <Show dispatch={dispatch} key={show.imdbID} show={show} />
                 ))}
               </ul>
             </div> : null
