@@ -59,6 +59,18 @@ const searchResults = (state = searchResultsInitialState, action) => {
   }
 }
 
+const showReducer = (state = {}, action) => {
+  switch (action.type) {
+  case 'ASSIGN_SELECTED_EPISODE':
+    return {
+      ...state,
+      randomEpisode: action.randomEpisode,
+    }
+  default:
+    return state
+  }
+}
+
 const series = (state = seriesInitialState, action) => {
   switch (action.type) {
   case 'ADD_TO_WATCHING':
@@ -79,10 +91,7 @@ const series = (state = seriesInitialState, action) => {
 
     return [
       ...state.filter(show => show.imdbID !== action.imdbId),
-      {
-        ...foundShow,
-        randomEpisode: action.randomEpisode,
-      },
+      showReducer(foundShow, action),
     ]
   // OBSOLETE ?
   case 'POPULATE_STORE':
